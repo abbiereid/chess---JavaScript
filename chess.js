@@ -86,27 +86,14 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation()
-    const playerMoving = draggedElement.firstChild.firstChild.firstChild
-
-
-    if (playerMoving === currentPlayer) {
         
-        infoDisplay.textContent = ""
-
-        const taken = e.target.classList.contains('Piece')
-        e.target.append(draggedElement)
+    const taken = e.target.classList.contains('Piece')
+    e.target.append(draggedElement)
         if (taken) {
             e.target.removeChild(e.target.firstChild)
         }
         e.target.append(draggedElement)
         currentPlayer = currentPlayer === 'white' ? 'black' : 'white'
         turnDisplay.textContent = currentPlayer
-
-    } else {
-        infoDisplay.textContent = "It's not your turn!"
-    }
-    
-
-
 
 }
