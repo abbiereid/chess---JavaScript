@@ -9,7 +9,6 @@
     height: 40px;
     width: 40px;
     position: relative;
-    z-index: -10;
 }
 
 .square svg {
@@ -17,6 +16,7 @@
     width: 30px;
     margin: 5px;
     position: relative;
+    z-index: -9;
 }
 
 path {
