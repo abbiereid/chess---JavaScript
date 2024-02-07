@@ -25,7 +25,7 @@ const IDs = [
     'A8','B8','C8','D8','E8','F8','G8','H8'
 ]
 
-let currentPlayer = 'white'
+let currentPlayer = 'black'
 
 
 function createBoard() {
@@ -58,6 +58,8 @@ function createBoard() {
 
     })
 
+    turnPicker()
+
 }
 
 createBoard()
@@ -75,6 +77,12 @@ let startPositionID
 let draggedElement
 
 function dragStart (e) {
+    const colour = e.target.parentNode.firstChild.firstChild.classList[0]
+    
+    if (currentPlayer !== colour) {
+      e.preventDefault(); // Preventing drag start if it's not the current player's piece
+    }
+
     startPositionID = e.target.parentNode.getAttribute('squareID')
     draggedElement = e.target
 }
@@ -93,7 +101,16 @@ function dragDrop(e) {
             e.target.removeChild(e.target.firstChild)
         }
         e.target.append(draggedElement)
-        currentPlayer = currentPlayer === 'white' ? 'black' : 'white'
-        turnDisplay.textContent = currentPlayer
+        turnPicker()
 
+}
+
+function turnPicker() {
+    currentPlayer = currentPlayer === 'white' ? 'black' : 'white'
+    turnDisplay.textContent = currentPlayer
+
+    const pieceSquares = document.querySelectorAll(`#gameboard .square svg.${currentPlayer}`)
+    const otherSquares = document.querySelectorAll(`#gameboard .square svg:not(.${currentPlayer})`)
+    console.log(pieceSquares)
+    console.log(otherSquares)
 }
