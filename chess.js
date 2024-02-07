@@ -73,6 +73,10 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation()
+    const taken = e.target.classList.contains('Piece')
     e.target.append(draggedElement)
+    if (taken) {
+        e.target.removeChild(e.target.firstChild)
+    }
 }
 
