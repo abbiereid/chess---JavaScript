@@ -94,18 +94,14 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation()
-        
-    const taken = e.target.classList.contains('Piece')
-    const x = e.target.getAttribute('squareID')[0]
-    const y = e.target.getAttribute('squareID')[1]
-    
-    e.target.append(draggedElement)
-        if (taken) {
-            e.target.removeChild(e.target.firstChild)
-        }
-        e.target.append(draggedElement)
-        turnPicker()
 
+    const takingAPiece = e.target.firstChild !== null
+    if (takingAPiece) {
+        e.target.firstChild.remove()
+    }
+    e.target.append(draggedElement)
+
+    turnPicker()
 }
 
 function turnPicker() {
