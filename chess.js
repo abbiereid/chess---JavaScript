@@ -102,6 +102,8 @@ function dragDrop(e) {
     e.target.append(draggedElement)
 
     turnPicker()
+    const endPositionID = e.target.getAttribute('squareID')
+    console.log(isValidPawnMove(startPositionID,endPositionID,currentPlayer))
 }
 
 function turnPicker() {
@@ -112,4 +114,29 @@ function turnPicker() {
     const otherSquares = document.querySelectorAll(`#gameboard .square svg:not(.${currentPlayer})`)
     console.log(pieceSquares)
     console.log(otherSquares)
+}
+
+function isValidPawnMove(from, to, colour) {
+    const fromX = from[0]
+    const fromY = from[1]
+    const toX = to[0] 
+    const toY = to[1]
+
+    if (colour === 'white') {
+        if (fromX === toX && fromY + 1 === toY) {
+            return true
+        } else if (fromY === 2 && fromX === toX && fromY + 2 === toY) {
+            return true
+        } else {
+            return false
+        }
+    } else {
+        if (fromX === toX && fromY - 1 === toY) {
+            return true
+        } else if (fromY === 7 && fromX === toX && fromY - 2 === toY) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
